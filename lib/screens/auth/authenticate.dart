@@ -1,3 +1,4 @@
+import 'package:active_pals/screens/auth/sign_in.dart';
 import 'package:flutter/material.dart';
 
 class Authenticate extends StatefulWidget {
@@ -10,6 +11,9 @@ class Authenticate extends StatefulWidget {
 class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.redAccent,child: Text("Auth"),);
+    return Container(
+      color: Colors.redAccent,
+      child: SignIn(),
+    );
   }
 }

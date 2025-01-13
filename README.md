@@ -1,16 +1,21 @@
-# active_pals
+# ActivePals
+A simple mobile app to learn Flutter and Firebase.
 
-A new Flutter project.
+## Use case
+This social fitness app is built for fitness enthusiasts, households, or friend groups who want to organize group exercise sessions or track individual workout preferences. Whether it’s deciding on yoga vs. HIIT or tracking who prefers solo running vs. gym sessions, this app makes planning seamless.
 
-## Getting Started
+## Key Features
 
-This project is a starting point for a Flutter application.
+- User Registration & Login:
 
-A few resources to get you started if this is your first Flutter project:
+Users create accounts to save their workout preferences.
+Firebase Authentication for login/sign-up functionality.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Workout Preferences Dashboard:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Each user specifies workout type (e.g., yoga, running, weightlifting) and intensity level (slider: low, medium, high).
+            
+
+- Settings
+
+Users can update their preferences anytime
