@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:active_pals/screens/services/auth.dart';
+import 'package:active_pals/widgets/constants.dart';
 
 import 'package:active_pals/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +65,7 @@ class _RegisterState extends State<Register> {
                         height: 20,
                       ),
                       TextFormField(
+                        decoration: textInputDecoration.copyWith(hintText: "Email"),
                         validator: (val) =>
                             val!.isEmpty ? "Enter an email" : null,
                         onChanged: (val) {
@@ -74,6 +76,7 @@ class _RegisterState extends State<Register> {
                         height: 20,
                       ),
                       TextFormField(
+                        decoration: textInputDecoration.copyWith(hintText: "Password"),
                         obscureText: true,
                         validator: (val) => val!.length < 6
                             ? "Enter a password with 6+ characters"
