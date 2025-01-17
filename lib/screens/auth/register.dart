@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:active_pals/screens/services/auth.dart';
-import 'package:active_pals/widgets/primary_button.dart';
+
 import 'package:active_pals/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
 
@@ -99,8 +99,13 @@ class _RegisterState extends State<Register> {
                               }
                             }
                           }),
-                          SizedBox(height: 20,),
-                          Text(error, style: TextStyle(color: Colors.pink),)
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        error,
+                        style: TextStyle(color: Colors.pink),
+                      ),
                     ],
                   ))
             ],

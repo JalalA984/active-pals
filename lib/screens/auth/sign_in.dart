@@ -14,9 +14,11 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
 
   String email = "";
   String password = "";
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -53,36 +55,57 @@ class _SignInState extends State<SignIn> {
               ),
               const SizedBox(height: 20.0),
               Form(
+                  key: _formKey,
                   child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    onChanged: (val) {
-                      setState(() => email = val);
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    obscureText: true,
-                    onChanged: (val) {
-                      setState(() => password = val);
-                    },
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  PrimaryButton(
-                      text: "Sign in",
-                      onPressed: () async {
-                        log("user input: $email [for email]");
-                        log("user input: $password [for password]");
-                      })
-                ],
-              ))
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        validator: (val) =>
+                            val!.isEmpty ? "Enter an email" : null,
+                        onChanged: (val) {
+                          setState(() => email = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        obscureText: true,
+                        validator: (val) => val!.length < 6
+                            ? "Enter a password with 6+ characters"
+                            : null,
+                        onChanged: (val) {
+                          setState(() => password = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      PrimaryButton(
+                          text: "Sign in",
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              log("sign in button press form validate passed");
+                              dynamic result =
+                                  await _auth.signWithEandP(email, password);
+                              if (result == null) {
+                                log("sign in FAIL on firebase auth backend");
+                                setState(() =>
+                                    error = "Email and/or password incorrect");
+                              }
+                            }
+                          }),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        error,
+                        style: TextStyle(color: Colors.pink),
+                      ),
+                    ],
+                  ))
             ],
           ),
         ),
