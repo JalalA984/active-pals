@@ -1,5 +1,6 @@
 import 'package:active_pals/models/Pal.dart';
 import 'package:active_pals/screens/home/pals_list.dart';
+import 'package:active_pals/screens/home/settings_form.dart';
 import 'package:active_pals/screens/services/auth.dart';
 import 'package:active_pals/screens/services/database.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class Home extends StatelessWidget {
       showModalBottomSheet(context: context, builder: (context) {
         return Container(
           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-          child: Text("Bottom Sheet here..."),
+          child: SettingsForm(),
         );
       });
 
