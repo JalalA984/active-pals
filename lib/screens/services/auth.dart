@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:active_pals/models/user_model.dart';
+import 'package:active_pals/screens/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 // Define all methods that interact with Firebase Auth
@@ -50,6 +51,9 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User? user = result.user;
+
+      // Create new document for user
+      await DatabaseService(uid: user!.uid).updateUserData('Cardio', "New Member", 100);
       return _userFromFirebaseUser(user);
     } catch (err) {
       log(err.toString());
