@@ -15,8 +15,12 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+
   String email = "";
   String password = "";
+
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -53,36 +57,52 @@ class _RegisterState extends State<Register> {
               ),
               const SizedBox(height: 20.0),
               Form(
+                  key: _formKey,
                   child: Column(
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    onChanged: (val) {
-                      setState(() => email = val);
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    obscureText: true,
-                    onChanged: (val) {
-                      setState(() => password = val);
-                    },
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  SecondaryButton(
-                      text: "Sign up",
-                      onPressed: () async {
-                        log("user input: $email [for email]");
-                        log("user input: $password [for password]");
-                      })
-                ],
-              ))
+                    children: [
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        validator: (val) =>
+                            val!.isEmpty ? "Enter an email" : null,
+                        onChanged: (val) {
+                          setState(() => email = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextFormField(
+                        obscureText: true,
+                        validator: (val) => val!.length < 6
+                            ? "Enter a password with 6+ characters"
+                            : null,
+                        onChanged: (val) {
+                          setState(() => password = val);
+                        },
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      SecondaryButton(
+                          text: "Sign up",
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              log("register button press form validate passed");
+                              dynamic result = await _auth.registerWithEandP(
+                                  email, password);
+                              if (result == null) {
+                                log("register process FAIL on firebase auth backend");
+                                setState(() => error =
+                                    "Please supply a valid email and/or password");
+                              }
+                            }
+                          }),
+                          SizedBox(height: 20,),
+                          Text(error, style: TextStyle(color: Colors.pink),)
+                    ],
+                  ))
             ],
           ),
         ),
