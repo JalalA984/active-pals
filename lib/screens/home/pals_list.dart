@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:active_pals/models/Pal.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,18 +14,33 @@ class PalsList extends StatefulWidget {
 class _PalsListState extends State<PalsList> {
   @override
   Widget build(BuildContext context) {
-    final preferences = Provider.of<QuerySnapshot?>(context); // Make nullable
+    final pals = Provider.of<List<Pal>?>(context); // Safely handle nullable value
 
-    if (preferences == null) {
-      log("Preferences are null");
-      return const Center(child: CircularProgressIndicator());
+    if (pals == null || pals.isEmpty) {
+      log("No pals available or data is still loading.");
+      return const Center(
+        child: Text(
+          "No pals to display.",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+      );
     }
 
-    for (var doc in preferences.docs) {
-      final data = doc.data() as Map<String, dynamic>; // Safely cast to a Map
-      log("Document: ${data.toString()}");
-    }
+    pals.forEach((pal) {
+      log("Name: ${pal.name}");
+      log("Workout: ${pal.workout}");
+      log("Intensity: ${pal.intensity}");
+    });
 
-    return const Placeholder();
+    return ListView.builder(
+      itemCount: pals.length,
+      itemBuilder: (context, index) {
+        final pal = pals[index];
+        return ListTile(
+          title: Text(pal.name),
+          subtitle: Text("Workout: ${pal.workout}, Intensity: ${pal.intensity}"),
+        );
+      },
+    );
   }
 }

@@ -1,7 +1,7 @@
+import 'package:active_pals/models/Pal.dart';
 import 'package:active_pals/screens/home/pals_list.dart';
 import 'package:active_pals/screens/services/auth.dart';
 import 'package:active_pals/screens/services/database.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
 
-    return StreamProvider<QuerySnapshot?>.value(
+    return StreamProvider<List<Pal>?>.value(
       value: DatabaseService().preferences,
       initialData: null,
       child: Scaffold(
@@ -34,7 +34,7 @@ class Home extends StatelessWidget {
 
 
         body: PalsList(
-          
+
         ),
       
       
