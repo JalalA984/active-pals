@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:active_pals/screens/services/auth.dart';
 import 'package:active_pals/widgets/constants.dart';
+import 'package:active_pals/widgets/loading.dart';
 import 'package:active_pals/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
@@ -17,13 +18,15 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
+  bool loading = false;
+
   String email = "";
   String password = "";
   String error = "";
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue[400],
         elevation: 0.0,
@@ -63,7 +66,8 @@ class _SignInState extends State<SignIn> {
                         height: 20,
                       ),
                       TextFormField(
-                        decoration: textInputDecoration.copyWith(hintText: "Email"),
+                        decoration:
+                            textInputDecoration.copyWith(hintText: "Email"),
                         validator: (val) =>
                             val!.isEmpty ? "Enter an email" : null,
                         onChanged: (val) {
@@ -74,7 +78,8 @@ class _SignInState extends State<SignIn> {
                         height: 20,
                       ),
                       TextFormField(
-                        decoration: textInputDecoration.copyWith(hintText: "Password"),
+                        decoration:
+                            textInputDecoration.copyWith(hintText: "Password"),
                         obscureText: true,
                         validator: (val) => val!.length < 6
                             ? "Enter a password with 6+ characters"
@@ -90,13 +95,16 @@ class _SignInState extends State<SignIn> {
                           text: "Sign in",
                           onPressed: () async {
                             if (_formKey.currentState!.validate()) {
+                              setState(() => loading = true);
                               log("sign in button press form validate passed");
                               dynamic result =
                                   await _auth.signWithEandP(email, password);
                               if (result == null) {
                                 log("sign in FAIL on firebase auth backend");
-                                setState(() =>
-                                    error = "Email and/or password incorrect");
+                                setState(() {
+                                  error = "Email and/or password incorrect";
+                                  loading = false;
+                                });
                               }
                             }
                           }),
