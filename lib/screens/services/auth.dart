@@ -26,6 +26,13 @@ class AuthService {
     }
   }
 
+  // Stream
+  Stream<UserModel?> get user {
+    return _auth.authStateChanges()
+      .map((User? user) => _userFromFirebaseUser(user));
+  }
+
+
 
   // Sign in with Email + Password
 
@@ -34,4 +41,12 @@ class AuthService {
 
 
   // Sign Out
+  Future signOut() async {
+    try {
+      log("attempting to sign out");
+      return await _auth.signOut();
+    } catch (err) {
+      log(err.toString());
+    }
+  }
 }
