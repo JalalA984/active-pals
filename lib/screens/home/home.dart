@@ -12,9 +12,17 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: Text("ActivePals"),
         backgroundColor: Colors.blue[400],
-        actions: [IconButton(onPressed: () async {
-          await _auth.signOut();
-        }, icon: Icon(Icons.person))],
+        actions: [
+          TextButton.icon(
+              onPressed: () async {
+                await _auth.signOut();
+              },
+              icon: const Icon(Icons.person, color: Colors.black),
+              label: const Text(
+                "Logout",
+                style: TextStyle(color: Colors.black),
+              )),
+        ],
       ),
     );
   }

@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:active_pals/screens/services/auth.dart';
 import 'package:active_pals/widgets/primary_button.dart';
+import 'package:active_pals/widgets/secondary_button.dart';
 import 'package:flutter/material.dart';
 
 class Register extends StatefulWidget {
-  const Register({super.key});
+  final Function toggleView;
+  const Register({super.key, required this.toggleView});
 
   @override
   State<Register> createState() => _RegisterState();
@@ -23,6 +25,17 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.red[300],
         elevation: 0.0,
         title: const Text("Sign up for ActivePals"),
+        actions: [
+          TextButton.icon(
+              onPressed: () {
+                widget.toggleView();
+              },
+              icon: const Icon(Icons.person, color: Colors.black),
+              label: const Text(
+                "Sign in",
+                style: TextStyle(color: Colors.black),
+              )),
+        ],
       ),
       body: Center(
         child: Container(
@@ -62,7 +75,7 @@ class _RegisterState extends State<Register> {
                   SizedBox(
                     height: 40,
                   ),
-                  PrimaryButton(
+                  SecondaryButton(
                       text: "Sign up",
                       onPressed: () async {
                         log("user input: $email [for email]");

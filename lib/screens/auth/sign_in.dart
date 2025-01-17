@@ -5,7 +5,8 @@ import 'package:active_pals/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+  final Function toggleView;
+  const SignIn({super.key, required this.toggleView});
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -24,6 +25,17 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Colors.blue[400],
         elevation: 0.0,
         title: const Text("Sign in to ActivePals"),
+        actions: [
+          TextButton.icon(
+              onPressed: () {
+                widget.toggleView();
+              },
+              icon: const Icon(Icons.person, color: Colors.black),
+              label: const Text(
+                "Register",
+                style: TextStyle(color: Colors.black),
+              )),
+        ],
       ),
       body: Center(
         child: Container(
