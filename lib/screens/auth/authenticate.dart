@@ -1,3 +1,4 @@
+import 'package:active_pals/screens/auth/register.dart';
 import 'package:active_pals/screens/auth/sign_in.dart';
 import 'package:flutter/material.dart';
 
