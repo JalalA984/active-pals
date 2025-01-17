@@ -12,6 +12,16 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthService _auth = AuthService();
 
+    void _showSettingsPanel() {
+      showModalBottomSheet(context: context, builder: (context) {
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+          child: Text("Bottom Sheet here..."),
+        );
+      });
+
+    }
+
     return StreamProvider<List<Pal>?>.value(
       value: DatabaseService().preferences,
       initialData: null,
@@ -20,6 +30,19 @@ class Home extends StatelessWidget {
           title: Text("ActivePals"),
           backgroundColor: Colors.blue[400],
           actions: [
+
+          TextButton.icon(
+                onPressed: () {
+                  _showSettingsPanel();
+                  
+                },
+                icon: const Icon(Icons.settings, color: Colors.black),
+                label: const Text(
+                  "Settings",
+                  style: TextStyle(color: Colors.black),
+                )),
+
+
             TextButton.icon(
                 onPressed: () async {
                   await _auth.signOut();
@@ -29,6 +52,10 @@ class Home extends StatelessWidget {
                   "Logout",
                   style: TextStyle(color: Colors.black),
                 )),
+
+
+      
+
           ],
         ),
 
@@ -43,3 +70,4 @@ class Home extends StatelessWidget {
     );
   }
 }
+

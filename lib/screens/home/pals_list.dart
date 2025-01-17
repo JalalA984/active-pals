@@ -26,19 +26,22 @@ class _PalsListState extends State<PalsList> {
       );
     }
 
-    pals.forEach((pal) {
-      log("Name: ${pal.name}");
-      log("Workout: ${pal.workout}");
-      log("Intensity: ${pal.intensity}");
-    });
+    // pals.forEach((pal) {
+    //   log("Name: ${pal.name}");
+    //   log("Workout: ${pal.workout}");
+    //   log("Intensity: ${pal.intensity}");
+    // });
 
     return ListView.builder(
       itemCount: pals.length,
       itemBuilder: (context, index) {
         final pal = pals[index];
         return ListTile(
+          leading: CircleAvatar(
+            radius: 25.0, backgroundColor: Colors.blueAccent[pal.intensity],
+          ),
           title: Text(pal.name),
-          subtitle: Text("Workout: ${pal.workout}, Intensity: ${pal.intensity}"),
+          subtitle: Text("Prefers: ${pal.workout}, Intensity: ${pal.intensity}"),
         );
       },
     );
