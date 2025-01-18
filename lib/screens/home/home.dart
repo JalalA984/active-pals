@@ -57,11 +57,7 @@ class Home extends StatelessWidget {
                 )),
           ],
         ),
-        body: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/bg.jpg"), fit: BoxFit.cover)),
-            child: PalsList()),
+        body: PalsList(),
       ),
     );
   }

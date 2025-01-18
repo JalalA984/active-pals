@@ -33,7 +33,7 @@ class _SignInState extends State<SignIn> {
               backgroundColor: Colors.blue[400],
               elevation: 0.0,
               title: const Text(
-                "Sign in to ActivePals",
+                "Sign in",
                 style: TextStyle(
                   fontFamily: 'Azonix', // Apply the custom font
                 ),
@@ -59,7 +59,7 @@ class _SignInState extends State<SignIn> {
                     const Text(
                       "Welcome to ActivePals",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                         fontFamily: 'Azonix',

@@ -34,7 +34,7 @@ class _RegisterState extends State<Register> {
               backgroundColor: Colors.red[300],
               elevation: 0.0,
               title: const Text(
-                "Sign up for ActivePals",
+                "Sign up",
                 style: TextStyle(
                   fontFamily: 'Azonix', // Apply the custom font
                 ),
@@ -62,7 +62,7 @@ class _RegisterState extends State<Register> {
                     const Text(
                       "Register for ActivePals",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
                         fontFamily: 'Azonix',
