@@ -33,7 +33,12 @@ class _RegisterState extends State<Register> {
             appBar: AppBar(
               backgroundColor: Colors.red[300],
               elevation: 0.0,
-              title: const Text("Sign up for ActivePals"),
+              title: const Text(
+                "Sign up for ActivePals",
+                style: TextStyle(
+                  fontFamily: 'Azonix', // Apply the custom font
+                ),
+              ),
               actions: [
                 TextButton.icon(
                     onPressed: () {
@@ -42,7 +47,9 @@ class _RegisterState extends State<Register> {
                     icon: const Icon(Icons.person, color: Colors.black),
                     label: const Text(
                       "Sign in",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
                     )),
               ],
             ),
@@ -58,6 +65,7 @@ class _RegisterState extends State<Register> {
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                         color: Colors.black87,
+                        fontFamily: 'Azonix',
                       ),
                     ),
                     const SizedBox(height: 20.0),
@@ -105,7 +113,8 @@ class _RegisterState extends State<Register> {
                                     if (result == null) {
                                       log("register process FAIL on firebase auth backend");
                                       setState(() {
-                                        error = "Please supply a valid email and/or password";
+                                        error =
+                                            "Please supply a valid email and/or password";
                                         loading = false;
                                       });
                                     }

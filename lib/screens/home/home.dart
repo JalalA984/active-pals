@@ -29,7 +29,12 @@ class Home extends StatelessWidget {
       initialData: null,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("ActivePals"),
+          title: Text(
+            "ActivePals",
+            style: TextStyle(
+              fontFamily: 'Azonix', // Apply the custom font
+            ),
+          ),
           backgroundColor: Colors.blue[400],
           actions: [
             TextButton.icon(
@@ -55,7 +60,7 @@ class Home extends StatelessWidget {
         body: Container(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/bg.png"), fit: BoxFit.cover)),
+                    image: AssetImage("assets/bg.jpg"), fit: BoxFit.cover)),
             child: PalsList()),
       ),
     );
