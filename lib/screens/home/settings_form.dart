@@ -22,9 +22,9 @@ class _SettingsFormState extends State<SettingsForm> {
     "Martial Arts"
   ];
 
-  late String _currentName;
-  late String _currentWorkout;
-  late int _currentIntensity;
+  String _currentName = "";
+  String _currentWorkout = "Cardio"; // Default value
+  int _currentIntensity = 100; // Default value
 
   @override
   Widget build(BuildContext context) {
@@ -32,13 +32,13 @@ class _SettingsFormState extends State<SettingsForm> {
       key: _formKey,
       child: Column(
         children: [
-          Text(
+          const Text(
             "Update your exercise preferences",
             style: TextStyle(fontSize: 18.0),
           ),
-          SizedBox(
-            height: 20.0,
-          ),
+          const SizedBox(height: 20.0),
+
+          // Name input field
           TextFormField(
             decoration: textInputDecoration.copyWith(hintText: "Your name"),
             validator: (val) => val!.isEmpty ? "Please enter a name" : null,
@@ -46,9 +46,7 @@ class _SettingsFormState extends State<SettingsForm> {
               setState(() => _currentName = val);
             },
           ),
-          SizedBox(
-            height: 20.0,
-          ),
+          const SizedBox(height: 20.0),
 
           // Dropdown for workout type
           DropdownButtonFormField<String>(
@@ -65,25 +63,37 @@ class _SettingsFormState extends State<SettingsForm> {
               labelText: "Workout Preference",
               border: OutlineInputBorder(),
             ),
-            value: workoutTypes.isNotEmpty ? workoutTypes[0] : "Cardio",
+            value: _currentWorkout,
           ),
-          SizedBox(
-            height: 20.0,
-          ),
+          const SizedBox(height: 20.0),
 
           // Slider for intensity
-
-          SizedBox(
-            height: 20.0,
+          Slider(
+            min: 100,
+            max: 900,
+            divisions: 8,
+            value: _currentIntensity.toDouble(),
+            onChanged: (val) {
+              setState(() => _currentIntensity = val.round());
+            },
+            label: _currentIntensity.toString(),
+            activeColor: Colors.red[_currentIntensity],
+            inactiveColor: Colors.red[_currentIntensity],
           ),
+
+          const SizedBox(height: 20.0),
 
           // Form button
           PrimaryButton(
-              text: "Update",
-              onPressed: () async {
-                log(_currentName);
-                log(_currentWorkout);
-              })
+            text: "Update",
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                log("Name: $_currentName");
+                log("Workout: $_currentWorkout");
+                log("Intensity: $_currentIntensity");
+              }
+            },
+          ),
         ],
       ),
     );
