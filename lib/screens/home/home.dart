@@ -14,13 +14,14 @@ class Home extends StatelessWidget {
     final AuthService _auth = AuthService();
 
     void _showSettingsPanel() {
-      showModalBottomSheet(context: context, builder: (context) {
-        return Container(
-          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
-          child: SettingsForm(),
-        );
-      });
-
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 60.0),
+              child: SettingsForm(),
+            );
+          });
     }
 
     return StreamProvider<List<Pal>?>.value(
@@ -31,19 +32,15 @@ class Home extends StatelessWidget {
           title: Text("ActivePals"),
           backgroundColor: Colors.blue[400],
           actions: [
-
-          TextButton.icon(
+            TextButton.icon(
                 onPressed: () {
                   _showSettingsPanel();
-                  
                 },
                 icon: const Icon(Icons.settings, color: Colors.black),
                 label: const Text(
                   "Settings",
                   style: TextStyle(color: Colors.black),
                 )),
-
-
             TextButton.icon(
                 onPressed: () async {
                   await _auth.signOut();
@@ -53,22 +50,14 @@ class Home extends StatelessWidget {
                   "Logout",
                   style: TextStyle(color: Colors.black),
                 )),
-
-
-      
-
           ],
         ),
-
-
-        body: PalsList(
-
-        ),
-      
-      
-        
+        body: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/bg.png"), fit: BoxFit.cover)),
+            child: PalsList()),
       ),
     );
   }
 }
-

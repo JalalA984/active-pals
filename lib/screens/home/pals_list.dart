@@ -39,6 +39,7 @@ class _PalsListState extends State<PalsList> {
         return ListTile(
           leading: CircleAvatar(
             radius: 25.0, backgroundColor: Colors.red[pal.intensity],
+            backgroundImage: AssetImage("assets/smile.png"),
           ),
           title: Text(pal.name),
           subtitle: Text("Prefers: ${pal.workout} | Intensity: ${pal.intensity}"),

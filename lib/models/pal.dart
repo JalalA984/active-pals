@@ -5,7 +5,4 @@ class Pal {
 
   Pal({required this.name, required this.workout, required this.intensity});
 
-  
-  
-
 }
