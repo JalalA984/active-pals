@@ -1,5 +1,8 @@
 # ActivePals
-A simple mobile app to learn Flutter and Firebase.
+A simple mobile cross-platform app to learn Flutter and Firebase.
+
+Check out the deployed web-version [here](https://activepals-2025.web.app/)!
+
 
 ## Use case
 This social fitness app is built for fitness enthusiasts, households, or friend groups who want to organize group exercise sessions or track individual workout preferences. Whether it’s deciding on yoga vs. HIIT or tracking who prefers solo running vs. gym sessions, this app makes planning seamless.
